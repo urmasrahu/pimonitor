@@ -20,7 +20,9 @@ COLOR_ERROR = (255, 0, 0)
 # colors for terminal output
 COLOR_TERM_ALERT = '\033[91m'
 COLOR_TERM_OK = '\033[92m'
+COLOR_TERM_BLUE_BACKGR = '\033[44m'
 COLOR_TERM_END = '\033[0m'
+
 
 
 IP_ADDRESS = "192.168.10.1" # will ping this address to check for connection, e.g. use your home router address
@@ -84,7 +86,7 @@ class CpuTempMonitor(BaseMonitor):
     def run(self):
         while True:
             temperature = CPUTemperature().temperature
-            print(f"CPU temperature: {temperature}")
+            print(f"{COLOR_TERM_BLUE_BACKGR}CPU temperature: {temperature}{COLOR_TERM_END}")
             color = self.GetColorForCpuTemp(temperature)
             self.led.On(self.index_led, color)
             time.sleep(self.polling_interval)
